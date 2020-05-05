@@ -16,11 +16,28 @@ public class MenuManagerScript : MonoBehaviour
     private int players_count = 0;
     private List<bool> readys;
     private List<float> holds;
+    private List<GameObject> icons;
 
     void Start()
     {
         readys = new List<bool>();
         holds = new List<float>();
+        icons = new List<GameObject>();
+    }
+
+    public void SetReady(int i)
+    {
+        if (i >= players_count) return;
+        if (holds[i] <= hold_time) return;
+
+        readys[i] = true;
+        icons[i].transform.GetChild(2).gameObject.SetActive(false);
+        icons[i].transform.GetChild(1).GetComponent<Text>().text = "Ready!";
+
+        if(players_count >= 2 && readys.All(b => b == true))
+        {
+            SceneManager.LoadScene("SampleScene");
+        }
     }
 
     void Update()
@@ -35,23 +52,19 @@ public class MenuManagerScript : MonoBehaviour
         {
             for(int i = players_count; i < new_players_count; i++)
             {
-                GameObject new_icon = Instantiate(player_icon_prefab, canvas.transform);
+                icons.Add(Instantiate(player_icon_prefab, canvas.transform));
                 if(PlayerInputManagerSingleton.instance.transform.GetChild(i).GetComponent<PlayerInput>().devices[0].displayName == "Keyboard")
                 {
-                    new_icon.transform.GetChild(0).GetComponent<Image>().sprite = keyboard;
+                    icons[i].transform.GetChild(0).GetComponent<Image>().sprite = keyboard;
                 }
-                new_icon.GetComponent<RectTransform>().anchoredPosition = new Vector3(100*i, -64, 0);
-                new_icon.transform.GetChild(1).GetComponent<Text>().text = "Player " + (i + 1).ToString() + " Joined!";
+                icons[i].transform.GetChild(0).GetComponent<Waver>().offset = i;
+                icons[i].GetComponent<RectTransform>().anchoredPosition = new Vector3(128*i - 192, -64, 0);
+                icons[i].transform.GetChild(1).GetComponent<Text>().text = "Player " + (i + 1).ToString() + " Joined!";
                 readys.Add(false);
                 holds.Add(0f);
             }
 
             players_count = new_players_count;
-        }
-
-        if(readys.Count >= 2 && readys.All(b => b == true))
-        {
-            SceneManager.LoadScene("SampleScene");
         }
     }
 }

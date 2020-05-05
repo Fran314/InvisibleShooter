@@ -9,6 +9,8 @@ public class PlayerInputHandler : MonoBehaviour
 {
     private PlayerInput playerInput;
     private PlayerScript player;
+
+    public int game_state = 0;
     private void Awake()
     {
         /*
@@ -34,5 +36,17 @@ public class PlayerInputHandler : MonoBehaviour
     {
         if (player != null)
             player.Shoot(context.ReadValue<Vector2>());
+    }
+
+    public void OnConfirm(CallbackContext context)
+    {
+        if(game_state == 0)
+        {
+            GameObject menu_manager = GameObject.Find("MenuManager");
+            if(menu_manager != null)
+            {
+                menu_manager.GetComponent<MenuManagerScript>().SetReady(GetComponent<PlayerInput>().playerIndex);
+            }
+        }
     }
 }

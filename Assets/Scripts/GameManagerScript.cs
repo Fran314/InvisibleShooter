@@ -16,8 +16,9 @@ public class GameManagerScript : MonoBehaviour
 
     public Sprite full_heart, empty_heart;
 
-    void Awake()
+    void Start()
     {
+        Debug.Log("Awaking Game Manager");
         hearts = new Image[12];
         for(int i = 0; i < 4; i++)
         {
@@ -64,6 +65,7 @@ public class GameManagerScript : MonoBehaviour
             players[i].SetPlayerIndex(i);
             players[i].Reset(players_spawn[i]);
             player_inputs[i].GetComponent<PlayerInputHandler>().SetPlayerScript(players[i].GetComponent<PlayerScript>());
+            player_inputs[i].GetComponent<PlayerInputHandler>().game_state = 1;
         }
     }
 

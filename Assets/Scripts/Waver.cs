@@ -7,6 +7,7 @@ public class Waver : MonoBehaviour
     private Vector3 original_transform;
     public float wobble_factor = 10f;
     public float wobble_speed = 1f;
+    public float offset = 0f;
 
     void Start()
     {
@@ -16,6 +17,6 @@ public class Waver : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.position = original_transform + new Vector3(0f, Mathf.Abs(Mathf.Sin(Time.time * wobble_speed)) * wobble_factor, 0f);
+        transform.position = original_transform + new Vector3(0f, Mathf.Abs(Mathf.Sin(Time.time * wobble_speed + offset)) * wobble_factor, 0f);
     }
 }
