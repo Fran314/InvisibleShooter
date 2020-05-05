@@ -11,10 +11,17 @@ public class PlayerInputHandler : MonoBehaviour
     private PlayerScript player;
     private void Awake()
     {
+        /*
         playerInput = GetComponent<PlayerInput>();
         var movers = FindObjectsOfType<PlayerScript>();
         var index = playerInput.playerIndex;
         player = movers.FirstOrDefault(m => m.GetPlayerIndex() == index);
+        */
+    }
+
+    public void SetPlayerScript(PlayerScript arg)
+    {
+        player = arg;
     }
 
     public void OnMove(CallbackContext context)

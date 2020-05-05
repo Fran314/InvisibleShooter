@@ -5,11 +5,7 @@ using UnityEngine;
 public class PlayerScript : MonoBehaviour
 {
     [SerializeField]
-    private int playerIndex;
-    [SerializeField]
     private Color playerColor;
-    [SerializeField]
-    private Transform spawn;
     [SerializeField]
     private int max_health = 3;
     [SerializeField]
@@ -21,7 +17,9 @@ public class PlayerScript : MonoBehaviour
 
     public GameObject bullet_prefab;
 
-    private int health = 0;
+    private int playerIndex;
+
+    public int health = 0;
     private float last_shoot = 0f;
 
     private Vector3 moveDirection = Vector3.zero;
@@ -31,10 +29,9 @@ public class PlayerScript : MonoBehaviour
 
     private void Awake()
     {
-        Reset();
+        //Reset();
     }
-
-    private void Reset()
+    public void Reset(Transform spawn)
     {
         transform.position = spawn.position;
         transform.rotation = Quaternion.identity;
@@ -46,6 +43,11 @@ public class PlayerScript : MonoBehaviour
     public int GetPlayerIndex()
     {
         return playerIndex;
+    }
+
+    public void SetPlayerIndex(int i)
+    {
+        playerIndex = i;
     }
 
     public void SetInputVector(Vector2 direction)
@@ -68,10 +70,6 @@ public class PlayerScript : MonoBehaviour
     public void Damage(int damage)
     {
         health -= damage;
-        if(health <= 0)
-        {
-            Reset();
-        }
     }
 
     void Update()
