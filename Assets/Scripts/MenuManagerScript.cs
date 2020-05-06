@@ -173,12 +173,38 @@ public class MenuManagerScript : MonoBehaviour
                 canvas.transform.GetChild(0).gameObject.SetActive(false);
                 canvas.transform.GetChild(1).gameObject.SetActive(true);
             }
+            else if (selected_button == 1)
+            {
+                menu_state = 2;
+                canvas.transform.GetChild(0).gameObject.SetActive(false);
+                canvas.transform.GetChild(2).gameObject.SetActive(true);
+            }
+            else if (selected_button == 2)
+            {
+                menu_state = 3;
+                canvas.transform.GetChild(0).gameObject.SetActive(false);
+                canvas.transform.GetChild(3).gameObject.SetActive(true);
+            }
+            else if (selected_button == 3)
+            {
+                menu_state = 4;
+                canvas.transform.GetChild(0).gameObject.SetActive(false);
+                canvas.transform.GetChild(4).gameObject.SetActive(true);
+            }
         }
         else if (menu_state == 1)
         {
             SetReady(index);
         }
         else if (menu_state == 2)
+        {
+
+        }
+        else if (menu_state == 3)
+        {
+
+        }
+        else if (menu_state == 4)
         {
 
         }
@@ -193,12 +219,6 @@ public class MenuManagerScript : MonoBehaviour
 
         if (menu_state == 0)
         {
-            if (selected_button == 0)
-            {
-                menu_state = 1;
-                canvas.transform.GetChild(0).gameObject.SetActive(false);
-                canvas.transform.GetChild(1).gameObject.SetActive(true);
-            }
         }
         else if (menu_state == 1)
         {
@@ -208,7 +228,21 @@ public class MenuManagerScript : MonoBehaviour
         }
         else if (menu_state == 2)
         {
-
+            menu_state = 0;
+            canvas.transform.GetChild(0).gameObject.SetActive(true);
+            canvas.transform.GetChild(2).gameObject.SetActive(false);
+        }
+        else if (menu_state == 3)
+        {
+            menu_state = 0;
+            canvas.transform.GetChild(0).gameObject.SetActive(true);
+            canvas.transform.GetChild(3).gameObject.SetActive(false);
+        }
+        else if (menu_state == 4)
+        {
+            menu_state = 0;
+            canvas.transform.GetChild(0).gameObject.SetActive(true);
+            canvas.transform.GetChild(4).gameObject.SetActive(false);
         }
     }
 }
