@@ -1546,8 +1546,6 @@ MonoBehaviour:
   unselected_material: {fileID: 2100000, guid: 0889e8a364cb98947b554242685e5874, type: 2}
   audio: {fileID: 1227821436}
   levels:
-  - BarrierScene
-  - BasicScene
   - XScene
 --- !u!4 &1227821435
 Transform:
