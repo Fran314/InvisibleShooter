@@ -1042,7 +1042,9 @@ MonoBehaviour:
   gamepad: {fileID: 21300000, guid: c1bff77b2357e184284ef1a25dedca60, type: 3}
   hold_time: 0.2
   levels:
-  - BarrierScene 1
+  - SampleScene
+  - BarrierScene
+0fd9079a5931697b563ad62c6fc407f3917b3df1
 --- !u!4 &1227821435
 Transform:
   m_ObjectHideFlags: 0
