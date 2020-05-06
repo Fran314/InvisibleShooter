@@ -76,9 +76,11 @@ public class PlayerScript : MonoBehaviour
         }
     }
 
-    public void Damage(int damage)
+    public bool Damage(int damage)
     {
         health -= damage;
+        if (health <= 0) return true;
+        else return false;
     }
 
     public void SetDeltaAlpha(float new_delta_alpha)

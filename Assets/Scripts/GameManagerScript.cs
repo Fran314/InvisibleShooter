@@ -12,11 +12,16 @@ public class GameManagerScript : MonoBehaviour
     [SerializeField]
     private GameObject[] players_UI;
     [SerializeField]
+    private GameObject canvas;
+    [SerializeField]
     private Transform[] players_spawn;
-    private GameObject player_prefab;
 
     private int players_count = 0;
     private PlayerScript[] players_script;
+    private Text[] players_scoreboard_text;
+    private Text[] players_scoreboard_score;
+    private Image scoreboard_background;
+    private int[] players_score;
     private Image[] hearts;
 
     public Sprite full_heart, empty_heart;
@@ -25,9 +30,17 @@ public class GameManagerScript : MonoBehaviour
     {
         hearts = new Image[12];
         players_script = new PlayerScript[4];
+        players_scoreboard_text = new Text[4];
+        players_scoreboard_score = new Text[4];
+        players_score = new int[4];
+        scoreboard_background = canvas.transform.Find("BackgroundBottom").GetComponent<Image>();
+
         for (int i = 0; i < 4; i++)
         {
-            for(int j = 0; j < 3; j++)
+            players_scoreboard_text[i] = canvas.transform.Find("Player" + (i + 1) + "Text").GetComponent<Text>();
+            players_scoreboard_score[i] = canvas.transform.Find("Player" + (i + 1) + "Score").GetComponent<Text>();
+            players_score[i] = 0;
+            for (int j = 0; j < 3; j++)
             {
                 hearts[i * 3 + j] = players_UI[i].transform.GetChild(j).GetComponent<Image>();
             }
@@ -38,28 +51,24 @@ public class GameManagerScript : MonoBehaviour
         players_count = PlayerInputManagerSingleton.instance.transform.childCount;
         Transform[] player_inputs = new Transform[players_count];
 
+        scoreboard_background.GetComponent<RectTransform>().localScale = new Vector3(1, players_count, 1);
+
         if (players_count == 2)
         {
-            players_UI[0].SetActive(true);
-            players_UI[1].SetActive(true);
-            players_UI[2].SetActive(false);
-            players_UI[3].SetActive(false);
-
             players_UI[1].GetComponent<RectTransform>().anchorMin = players_UI[2].GetComponent<RectTransform>().anchorMin;
             players_UI[1].GetComponent<RectTransform>().anchorMax = players_UI[2].GetComponent<RectTransform>().anchorMax;
             players_UI[1].GetComponent<RectTransform>().anchoredPosition = players_UI[2].GetComponent<RectTransform>().anchoredPosition;
             players_spawn[1].transform.position = players_spawn[2].transform.position;
         }
-        else
+        for (int i = 0; i < players_count; i++)
         {
-            for (int i = 0; i < players_count; i++)
-            {
-                players_UI[i].SetActive(true);
-            }
-            for (int i = players_count; i < 4; i++)
-            {
-                players_UI[i].SetActive(false);
-            }
+            players_UI[i].SetActive(true);
+        }
+        for (int i = players_count; i < 4; i++)
+        {
+            players_UI[i].SetActive(false);
+            players_scoreboard_score[i].gameObject.SetActive(false);
+            players_scoreboard_text[i].gameObject.SetActive(false);
         }
 
         for (int i = 0; i < players_count; i++)
@@ -90,6 +99,8 @@ public class GameManagerScript : MonoBehaviour
                 hearts[i * 3 + 2].sprite = full_heart;
                 hearts[i * 3 + 1].sprite = full_heart;
             }
+
+            players_scoreboard_score[i].text = players_score[i].ToString();
         }
     }
 
@@ -133,8 +144,13 @@ public class GameManagerScript : MonoBehaviour
         return min_index;
     }
 
-    public void DamagePlayer(int index, int damage)
+    public bool DamagePlayer(int index, int damage)
     {
-        players_script[index].Damage(damage);
+        return players_script[index].Damage(damage);
+    }
+
+    public void IncreaseScore(int index)
+    {
+        players_score[index]++;
     }
 }

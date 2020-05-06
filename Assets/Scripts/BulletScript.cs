@@ -40,7 +40,10 @@ public class BulletScript : MonoBehaviour
 
         if(distance_to_player.magnitude <= delete_at_distance)
         {
-            game_manager.DamagePlayer(closest_player_index, damage);
+            if(game_manager.DamagePlayer(closest_player_index, damage))
+            {
+                game_manager.IncreaseScore(index);
+            }
             Instantiate(particle_prefab, closest_player_position, Quaternion.identity);
             Destroy(gameObject);
         }
