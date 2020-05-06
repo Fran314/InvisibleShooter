@@ -112,4 +112,29 @@ public class GameManagerScript : MonoBehaviour
 
         return players[min_index].transform.position;
     }
+
+    public int GetClosestPlayerIndexExcept(Vector3 position, int exception)
+    {
+        float min_dist = Mathf.Infinity;
+        int min_index = 0;
+        for (int i = 1; i < 4 && i != exception; i++)
+        {
+            if (players[i].activeSelf == true)
+            {
+                float curr_dist = (position - players[i].transform.position).magnitude;
+                if (curr_dist < min_dist)
+                {
+                    min_index = i;
+                    min_dist = curr_dist;
+                }
+            }
+        }
+
+        return min_index;
+    }
+
+    public void DamagePlayer(int index, int damage)
+    {
+        players_script[index].Damage(damage);
+    }
 }

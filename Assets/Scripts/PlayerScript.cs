@@ -20,8 +20,6 @@ public class PlayerScript : MonoBehaviour
     [SerializeField]
     private float time_before_shooting_exposure = 2f;
     [SerializeField]
-    private float bullet_offset = 1f;
-    [SerializeField]
     private float bullet_delta_alpha = 0.001f;
 
     public int health = 0;
@@ -134,7 +132,7 @@ public class PlayerScript : MonoBehaviour
                     shootDirection = new Vector3(0, 0, -1);
             }
             shootDirection = shootDirection.normalized;
-            GameObject bullet = Instantiate(bullet_prefab, transform.position + shootDirection * bullet_offset, Quaternion.identity);
+            GameObject bullet = Instantiate(bullet_prefab, transform.position, Quaternion.identity);
             bullet.GetComponent<BulletScript>().SetDirection(shootDirection);
             bullet.GetComponent<BulletScript>().SetIndex(player_index);
             bullet.GetComponentInChildren<Light>().color = new Color(player_material.color.r, player_material.color.g, player_material.color.b);

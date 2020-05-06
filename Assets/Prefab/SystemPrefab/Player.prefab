@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4776757923070222750}
   - component: {fileID: 4776757923070222720}
   - component: {fileID: 4776757923070222722}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -48,12 +48,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player_index: 0
   player_material: {fileID: 2100000, guid: fbf7476becda9f6408418d8f14d7eb79, type: 2}
+  bullet_prefab: {fileID: 4609273775154413971, guid: 6b33c3f757919bf4d8c45a5ad2e522dc,
+    type: 3}
   max_health: 3
   speed: 10
   shooting_cooldown: 0.5
-  bullet_offset: 3
-  bullet_prefab: {fileID: 4609273775154413971, guid: 6b33c3f757919bf4d8c45a5ad2e522dc,
-    type: 3}
+  time_before_shooting_exposure: 2
+  bullet_offset: 0
+  bullet_delta_alpha: 0.001
   health: 0
 --- !u!54 &4776757923070222720
 Rigidbody:
@@ -95,7 +97,7 @@ GameObject:
   - component: {fileID: 4776757923379636848}
   - component: {fileID: 4776757923379636815}
   - component: {fileID: 4776757923379636814}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cylinder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
