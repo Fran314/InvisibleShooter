@@ -1041,6 +1041,8 @@ MonoBehaviour:
   keyboard: {fileID: 21300000, guid: 1abfe3fc8b25a9e4899be38afd71be1d, type: 3}
   gamepad: {fileID: 21300000, guid: c1bff77b2357e184284ef1a25dedca60, type: 3}
   hold_time: 0.2
+  levels:
+  - SampleScene
 --- !u!4 &1227821435
 Transform:
   m_ObjectHideFlags: 0

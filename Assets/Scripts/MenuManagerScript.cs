@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -8,10 +9,17 @@ using UnityEngine.UI;
 
 public class MenuManagerScript : MonoBehaviour
 {
-    public GameObject canvas;
-    public GameObject player_icon_prefab;
-    public Sprite keyboard, gamepad;
-    public float hold_time = 0.2f;
+    [SerializeField]
+    private GameObject canvas;
+    [SerializeField]
+    private GameObject player_icon_prefab;
+    [SerializeField]
+    private Sprite keyboard, gamepad;
+    [SerializeField]
+    private float hold_time = 0.2f;
+
+    [SerializeField]
+    private string[] levels;
 
     private int players_count = 0;
     private List<bool> readys;
@@ -36,7 +44,7 @@ public class MenuManagerScript : MonoBehaviour
 
         if(players_count >= 2 && readys.All(b => b == true))
         {
-            SceneManager.LoadScene("Level2");
+            SceneManager.LoadScene(levels[UnityEngine.Random.Range(0, levels.Length)]);
         }
     }
 
