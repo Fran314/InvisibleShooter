@@ -9,11 +9,13 @@ public class BulletScript : MonoBehaviour
     [SerializeField]
     private int damage = 1;
 
+    public GameObject particle_prefab;
+
     private int index;
 
     void Update()
     {
-        transform.Translate(Vector3.forward * speed * Time.deltaTime);
+        transform.Translate(Vector3.forward.normalized * speed * Time.deltaTime);
     }
 
     public void SetIndex(int index)
@@ -29,6 +31,7 @@ public class BulletScript : MonoBehaviour
             if (player.GetPlayerIndex() != index)
             {
                 player.Damage(damage);
+                Instantiate(particle_prefab, transform.position, Quaternion.identity);
                 Destroy(gameObject);
             }
         }

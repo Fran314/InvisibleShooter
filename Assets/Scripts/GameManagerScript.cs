@@ -6,32 +6,36 @@ using UnityEngine.UI;
 
 public class GameManagerScript : MonoBehaviour
 {
-    public GameObject[] players_UI;
-    private Image[] hearts;
-    public Transform[] players_spawn;
-    public GameObject player_prefab;
+    [SerializeField]
+    private GameObject[] players;
+    [SerializeField]
+    private GameObject[] players_UI;
+    [SerializeField]
+    private Transform[] players_spawn;
+    private GameObject player_prefab;
 
     private int players_count = 0;
-    private PlayerScript[] players;
+    private PlayerScript[] players_script;
+    private Image[] hearts;
 
     public Sprite full_heart, empty_heart;
 
     void Start()
     {
-        Debug.Log("Awaking Game Manager");
         hearts = new Image[12];
-        for(int i = 0; i < 4; i++)
+        players_script = new PlayerScript[4];
+        for (int i = 0; i < 4; i++)
         {
             for(int j = 0; j < 3; j++)
             {
                 hearts[i * 3 + j] = players_UI[i].transform.GetChild(j).GetComponent<Image>();
             }
+            players_script[i] = players[i].GetComponent<PlayerScript>();
         }
 
         if (PlayerInputManagerSingleton.instance == null) return;
         players_count = PlayerInputManagerSingleton.instance.transform.childCount;
         Transform[] player_inputs = new Transform[players_count];
-        players = new PlayerScript[players_count];
 
         if (players_count == 2)
         {
@@ -59,12 +63,10 @@ public class GameManagerScript : MonoBehaviour
 
         for (int i = 0; i < players_count; i++)
         {
-            Debug.Log("Initializing Player " + i);
             player_inputs[i] = PlayerInputManagerSingleton.instance.transform.GetChild(i);
-            players[i] = Instantiate(player_prefab).GetComponent<PlayerScript>();
-            players[i].SetPlayerIndex(i);
-            players[i].Reset(players_spawn[i]);
-            player_inputs[i].GetComponent<PlayerInputHandler>().SetPlayerScript(players[i].GetComponent<PlayerScript>());
+            players[i].SetActive(true);
+            players_script[i].Reset(players_spawn[i]);
+            player_inputs[i].GetComponent<PlayerInputHandler>().SetPlayerScript(players_script[i].GetComponent<PlayerScript>());
             player_inputs[i].GetComponent<PlayerInputHandler>().game_state = 1;
         }
     }
@@ -73,17 +75,17 @@ public class GameManagerScript : MonoBehaviour
     {
         for (int i = 0; i < players_count; i++)
         {
-            if(players[i].health < 3)
+            if(players_script[i].health < 3)
             {
                 hearts[i * 3 + 2].sprite = empty_heart;
             }
-            if (players[i].health < 2)
+            if (players_script[i].health < 2)
             {
                 hearts[i * 3 + 1].sprite = empty_heart;
             }
-            if (players[i].health < 1)
+            if (players_script[i].health < 1)
             {
-                players[i].Reset(players_spawn[i]);
+                players_script[i].Reset(players_spawn[i]);
                 hearts[i * 3 + 2].sprite = full_heart;
                 hearts[i * 3 + 1].sprite = full_heart;
             }

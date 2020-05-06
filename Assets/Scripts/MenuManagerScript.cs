@@ -11,7 +11,7 @@ public class MenuManagerScript : MonoBehaviour
     public GameObject canvas;
     public GameObject player_icon_prefab;
     public Sprite keyboard, gamepad;
-    public float hold_time = 1f;
+    public float hold_time = 0.2f;
 
     private int players_count = 0;
     private List<bool> readys;
@@ -36,7 +36,7 @@ public class MenuManagerScript : MonoBehaviour
 
         if(players_count >= 2 && readys.All(b => b == true))
         {
-            SceneManager.LoadScene("SampleScene");
+            SceneManager.LoadScene("Level2");
         }
     }
 
