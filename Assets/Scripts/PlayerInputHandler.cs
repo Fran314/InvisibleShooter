@@ -33,14 +33,7 @@ public class PlayerInputHandler : MonoBehaviour
             GameObject menu_manager = GameObject.Find("MenuManager");
             if (menu_manager != null)
             {
-                if(Vector2.Dot(Vector2.up, context.ReadValue<Vector2>()) <= 0)
-                {
-                    menu_manager.GetComponent<MenuManagerScript>().Move(GetComponent<PlayerInput>().playerIndex, 1);
-                }
-                else
-                {
-                    menu_manager.GetComponent<MenuManagerScript>().Move(GetComponent<PlayerInput>().playerIndex, -1);
-                }
+                menu_manager.GetComponent<MenuManagerScript>().Move(GetComponent<PlayerInput>().playerIndex, context.ReadValue<Vector2>().normalized);
             }
         }
         else
@@ -57,14 +50,7 @@ public class PlayerInputHandler : MonoBehaviour
             GameObject menu_manager = GameObject.Find("MenuManager");
             if (menu_manager != null)
             {
-                if (Vector2.Dot(Vector2.up, context.ReadValue<Vector2>()) <= 0)
-                {
-                    menu_manager.GetComponent<MenuManagerScript>().Move(GetComponent<PlayerInput>().playerIndex, 1);
-                }
-                else
-                {
-                    menu_manager.GetComponent<MenuManagerScript>().Move(GetComponent<PlayerInput>().playerIndex, -1);
-                }
+                menu_manager.GetComponent<MenuManagerScript>().Move(GetComponent<PlayerInput>().playerIndex, context.ReadValue<Vector2>().normalized);
             }
         }
         else

@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
@@ -23,7 +24,11 @@ public class MenuManagerScript : MonoBehaviour
     private float delta_volume = 1f;
 
     [SerializeField]
-    private GameObject[] cubes;
+    private GameObject[] main_menu_cubes;
+    [SerializeField]
+    private GameObject[] select_level_cubes;
+    [SerializeField]
+    private GameObject quit_cube;
     [SerializeField]
     private Material selected_material;
     [SerializeField]
@@ -52,15 +57,20 @@ public class MenuManagerScript : MonoBehaviour
         icons = new List<GameObject>();
     }
 
-    public void SetReady(int i)
+    public void SetReady(int index)
     {
-        readys[i] = true;
-        icons[i].transform.GetChild(2).gameObject.SetActive(false);
-        icons[i].transform.GetChild(1).GetComponent<Text>().text = "Ready!";
+        readys[index] = true;
+        icons[index].transform.GetChild(2).gameObject.SetActive(false);
+        icons[index].transform.GetChild(1).GetComponent<Text>().text = "Ready!";
 
         if(players_count >= 2 && readys.All(b => b == true))
         {
-            loading_level = true;
+            menu_state = 5;
+            canvas.transform.GetChild(1).gameObject.SetActive(false);
+            canvas.transform.GetChild(5).gameObject.SetActive(true);
+            select_level_cubes[0].transform.parent.gameObject.SetActive(true);
+
+            selected_button = 0;
         }
     }
 
@@ -96,46 +106,44 @@ public class MenuManagerScript : MonoBehaviour
             players_count = new_players_count;
         }
 
-        for(int i = 0; i < 4; i++)
-        {
-            cubes[i].SetActive(menu_state == 0);
-        }
         if (menu_state == 0)
         {
             if (players_count > 0 && selected_button == -1) selected_button = 0;
             if(selected_button != -1)
             {
-                cubes[selected_button].GetComponent<MeshRenderer>().material = selected_material;
-                for(int i = 0; i < 4; i++)
+                main_menu_cubes[selected_button].GetComponent<MeshRenderer>().material = selected_material;
+                for(int i = 0; i < main_menu_cubes.Length; i++)
                 {
-                    if (i != selected_button) cubes[i].GetComponent<MeshRenderer>().material = unselected_material;
+                    if (i != selected_button) main_menu_cubes[i].GetComponent<MeshRenderer>().material = unselected_material;
                 }
             }
         }
         else if(menu_state == 1)
         {
-            if (!loading_level)
+        }
+        else if(menu_state == 5)
+        {
+            select_level_cubes[selected_button].GetComponent<MeshRenderer>().material = selected_material;
+            for (int i = 0; i < select_level_cubes.Length; i++)
             {
+                if (i != selected_button) select_level_cubes[i].GetComponent<MeshRenderer>().material = unselected_material;
             }
-            else
+            if (loading_level)
             {
-                canvas.transform.GetChild(1).Find("MainComunication").GetComponent<Text>().text = "Game Starting...";
+                canvas.transform.GetChild(5).Find("MainComunication").GetComponent<Text>().text = "Game Starting...";
                 audio.volume -= delta_volume * Time.deltaTime;
                 wait_before_loading -= Time.deltaTime;
 
                 if (wait_before_loading <= 0f)
                 {
-                    SceneManager.LoadScene(levels[UnityEngine.Random.Range(0, levels.Length)]);
+                    if(selected_button == 0) SceneManager.LoadScene(levels[UnityEngine.Random.Range(0, levels.Length)]);
+                    else SceneManager.LoadScene(levels[selected_button - 1]);
                 }
             }
         }
-        else if(menu_state == 2)
-        {
-
-        }
     }
 
-    public void Move(int index, int direction)
+    public void Move(int index, Vector2 direction)
     {
         if (index >= players_count) return;
         if (holds[index] <= hold_time) return;
@@ -144,17 +152,17 @@ public class MenuManagerScript : MonoBehaviour
 
         if (menu_state == 0)
         {
-            selected_button += direction;
-            if (selected_button <= -1) selected_button = 3;
-            else if (selected_button >= 4) selected_button = 0;
+            if (Vector2.Dot(Vector2.up, direction) <= 0) selected_button += 1;
+            else selected_button -= 1;
+            if (selected_button <= -1) selected_button = main_menu_cubes.Length - 1;
+            else if (selected_button >= main_menu_cubes.Length) selected_button = 0;
         }
-        else if (menu_state == 1)
+        else if(menu_state == 5)
         {
-
-        }
-        else if (menu_state == 2)
-        {
-
+            if (Vector2.Dot(Vector2.left, direction) <= 0) selected_button += 1;
+            else selected_button -= 1;
+            if (selected_button <= -1) selected_button = select_level_cubes.Length - 1;
+            else if (selected_button >= select_level_cubes.Length) selected_button = 0;
         }
     }
 
@@ -167,6 +175,7 @@ public class MenuManagerScript : MonoBehaviour
 
         if (menu_state == 0)
         {
+            main_menu_cubes[0].transform.parent.gameObject.SetActive(false);
             if (selected_button == 0)
             {
                 menu_state = 1;
@@ -208,6 +217,18 @@ public class MenuManagerScript : MonoBehaviour
         {
 
         }
+        else if (menu_state == 5)
+        {
+            loading_level = true;
+        }
+        else if (menu_state == 6)
+        {
+            menu_state = 0;
+            canvas.transform.GetChild(6).gameObject.SetActive(false);
+            canvas.transform.GetChild(0).gameObject.SetActive(true);
+            quit_cube.transform.parent.gameObject.SetActive(false);
+            main_menu_cubes[0].transform.parent.gameObject.SetActive(true);
+        }
     }
 
     public void GoBack(int index)
@@ -219,30 +240,48 @@ public class MenuManagerScript : MonoBehaviour
 
         if (menu_state == 0)
         {
+            menu_state = 6;
+            canvas.transform.GetChild(6).gameObject.SetActive(true);
+            canvas.transform.GetChild(0).gameObject.SetActive(false);
+            quit_cube.transform.parent.gameObject.SetActive(true);
+            main_menu_cubes[0].transform.parent.gameObject.SetActive(false);
         }
         else if (menu_state == 1)
         {
             menu_state = 0;
             canvas.transform.GetChild(0).gameObject.SetActive(true);
             canvas.transform.GetChild(1).gameObject.SetActive(false);
+            main_menu_cubes[0].transform.parent.gameObject.SetActive(true);
         }
         else if (menu_state == 2)
         {
             menu_state = 0;
             canvas.transform.GetChild(0).gameObject.SetActive(true);
             canvas.transform.GetChild(2).gameObject.SetActive(false);
+            main_menu_cubes[0].transform.parent.gameObject.SetActive(true);
         }
         else if (menu_state == 3)
         {
             menu_state = 0;
             canvas.transform.GetChild(0).gameObject.SetActive(true);
             canvas.transform.GetChild(3).gameObject.SetActive(false);
+            main_menu_cubes[0].transform.parent.gameObject.SetActive(true);
         }
         else if (menu_state == 4)
         {
             menu_state = 0;
             canvas.transform.GetChild(0).gameObject.SetActive(true);
             canvas.transform.GetChild(4).gameObject.SetActive(false);
+            main_menu_cubes[0].transform.parent.gameObject.SetActive(true);
+        }
+        else if (menu_state == 5)
+        {
+
+        }
+        else if(menu_state == 6)
+        {
+            Debug.Log("Welp");
+            Application.Quit();
         }
     }
 }
