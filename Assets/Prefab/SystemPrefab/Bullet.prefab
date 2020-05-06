@@ -139,10 +139,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abc5b661f891a7a4b9549cd51fc88386, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 15
+  initial_speed: 40
+  acceleration_factor: 1000
   damage: 1
   particle_prefab: {fileID: 6571392424075340952, guid: 1150b2fbd922e204182672f47d2db5e0,
     type: 3}
+  velocity: {x: 0, y: 0, z: 0}
 --- !u!135 &1621431632848057926
 SphereCollider:
   m_ObjectHideFlags: 0

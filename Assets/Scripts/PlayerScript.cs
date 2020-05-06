@@ -6,9 +6,11 @@ using UnityEngine;
 public class PlayerScript : MonoBehaviour
 {
     [SerializeField]
-    private int playerIndex;
+    private int player_index;
     [SerializeField]
-    private Color player_color;
+    private Material player_material;
+    [SerializeField]
+    private GameObject bullet_prefab;
     [SerializeField]
     private int max_health = 3;
     [SerializeField]
@@ -16,12 +18,17 @@ public class PlayerScript : MonoBehaviour
     [SerializeField]
     private float shooting_cooldown = 0.5f;
     [SerializeField]
+    private float time_before_shooting_exposure = 2f;
+    [SerializeField]
     private float bullet_offset = 1f;
     [SerializeField]
-    private GameObject bullet_prefab;
+    private float bullet_delta_alpha = 0.001f;
 
     public int health = 0;
     private float last_shoot = 0f;
+
+    private float curr_alpha = 0f;
+    private float delta_alpha = 0.001f;
 
     private Vector3 moveDirection = Vector3.zero;
     private Vector3 shootDirection = Vector3.zero;
@@ -32,6 +39,7 @@ public class PlayerScript : MonoBehaviour
     {
         //Reset();
     }
+
     public void Reset(Transform spawn)
     {
         transform.position = spawn.position;
@@ -39,16 +47,18 @@ public class PlayerScript : MonoBehaviour
 
         health = max_health;
         last_shoot = 0f;
+        curr_alpha = 1f;
+        delta_alpha = -0.02f;
     }
 
     public int GetPlayerIndex()
     {
-        return playerIndex;
+        return player_index;
     }
 
     public void SetPlayerIndex(int i)
     {
-        playerIndex = i;
+        player_index = i;
     }
 
     public void SetInputVector(Vector2 direction)
@@ -73,8 +83,20 @@ public class PlayerScript : MonoBehaviour
         health -= damage;
     }
 
+    public void SetDeltaAlpha(float new_delta_alpha)
+    {
+        delta_alpha = new_delta_alpha;
+    }
+
     void Update()
     {
+        GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
+
+        if (last_shoot <= -time_before_shooting_exposure) SetDeltaAlpha(bullet_delta_alpha);
+
+        curr_alpha += delta_alpha;
+        curr_alpha = Mathf.Clamp(curr_alpha, 0f, 1f);
+        player_material.color = new Color(player_material.color.r, player_material.color.g, player_material.color.b, curr_alpha);
         moveDirection = new Vector3(inputMove.x, 0, inputMove.y);
         moveDirection = transform.TransformDirection(moveDirection);
         moveDirection *= speed;
@@ -112,10 +134,14 @@ public class PlayerScript : MonoBehaviour
                     shootDirection = new Vector3(0, 0, -1);
             }
             shootDirection = shootDirection.normalized;
-            GameObject bullet = Instantiate(bullet_prefab, transform.position + shootDirection * bullet_offset, Quaternion.LookRotation(shootDirection));
-            bullet.GetComponent<BulletScript>().SetIndex(playerIndex);
-            bullet.GetComponentInChildren<Light>().color = player_color;
+            GameObject bullet = Instantiate(bullet_prefab, transform.position + shootDirection * bullet_offset, Quaternion.identity);
+            bullet.GetComponent<BulletScript>().SetDirection(shootDirection);
+            bullet.GetComponent<BulletScript>().SetIndex(player_index);
+            bullet.GetComponentInChildren<Light>().color = new Color(player_material.color.r, player_material.color.g, player_material.color.b);
+
             last_shoot = shooting_cooldown;
+            curr_alpha = 0f;
+            delta_alpha = 0f;
         }
 
         last_shoot -= Time.deltaTime;
