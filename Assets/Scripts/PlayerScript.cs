@@ -20,13 +20,13 @@ public class PlayerScript : MonoBehaviour
     [SerializeField]
     private float time_before_shooting_exposure = 2f;
     [SerializeField]
-    private float bullet_delta_alpha = 0.001f;
+    private float bullet_delta_alpha = 0.01f;
 
     public int health = 0;
     private float last_shoot = 0f;
 
     private float curr_alpha = 0f;
-    private float delta_alpha = 0.001f;
+    private float delta_alpha = 0f;
 
     private Vector3 moveDirection = Vector3.zero;
     private Vector3 shootDirection = Vector3.zero;
@@ -46,7 +46,7 @@ public class PlayerScript : MonoBehaviour
         health = max_health;
         last_shoot = 0f;
         curr_alpha = 1f;
-        delta_alpha = -0.02f;
+        delta_alpha = -2f;
     }
 
     public int GetPlayerIndex()

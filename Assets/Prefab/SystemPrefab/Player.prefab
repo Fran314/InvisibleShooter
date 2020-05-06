@@ -52,10 +52,10 @@ MonoBehaviour:
   bullet_prefab: {fileID: 4609273775154413971, guid: 6b33c3f757919bf4d8c45a5ad2e522dc,
     type: 3}
   max_health: 3
-  speed: 10
+  speed: 20
   shooting_cooldown: 0.5
   time_before_shooting_exposure: 2
-  bullet_delta_alpha: 0.001
+  bullet_delta_alpha: 0.1
   health: 0
 --- !u!54 &4776757923070222720
 Rigidbody:

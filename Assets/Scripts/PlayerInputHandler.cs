@@ -28,14 +28,36 @@ public class PlayerInputHandler : MonoBehaviour
 
     public void OnMove(CallbackContext context)
     {
-        if (player != null)
-            player.SetInputVector(context.ReadValue<Vector2>());
+        if(game_state == 0)
+        {
+            GameObject menu_manager = GameObject.Find("MenuManager");
+            if (menu_manager != null)
+            {
+                menu_manager.GetComponent<MenuManagerScript>().Move(GetComponent<PlayerInput>().playerIndex);
+            }
+        }
+        else
+        {
+            if (player != null)
+                player.SetInputVector(context.ReadValue<Vector2>());
+        }
     }
 
     public void OnShoot(CallbackContext context)
     {
-        if (player != null)
+        if (game_state == 0)
+        {
+            GameObject menu_manager = GameObject.Find("MenuManager");
+            if (menu_manager != null)
+            {
+                menu_manager.GetComponent<MenuManagerScript>().Move(GetComponent<PlayerInput>().playerIndex);
+            }
+        }
+        else
+        {
+            if (player != null)
             player.Shoot(context.ReadValue<Vector2>());
+        }
     }
 
     public void OnConfirm(CallbackContext context)
@@ -45,7 +67,7 @@ public class PlayerInputHandler : MonoBehaviour
             GameObject menu_manager = GameObject.Find("MenuManager");
             if(menu_manager != null)
             {
-                menu_manager.GetComponent<MenuManagerScript>().SetReady(GetComponent<PlayerInput>().playerIndex);
+                menu_manager.GetComponent<MenuManagerScript>().Select(GetComponent<PlayerInput>().playerIndex);
             }
         }
     }
