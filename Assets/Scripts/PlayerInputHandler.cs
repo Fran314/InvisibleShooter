@@ -33,7 +33,14 @@ public class PlayerInputHandler : MonoBehaviour
             GameObject menu_manager = GameObject.Find("MenuManager");
             if (menu_manager != null)
             {
-                menu_manager.GetComponent<MenuManagerScript>().Move(GetComponent<PlayerInput>().playerIndex);
+                if(Vector2.Dot(Vector2.up, context.ReadValue<Vector2>()) <= 0)
+                {
+                    menu_manager.GetComponent<MenuManagerScript>().Move(GetComponent<PlayerInput>().playerIndex, 1);
+                }
+                else
+                {
+                    menu_manager.GetComponent<MenuManagerScript>().Move(GetComponent<PlayerInput>().playerIndex, -1);
+                }
             }
         }
         else
@@ -50,7 +57,14 @@ public class PlayerInputHandler : MonoBehaviour
             GameObject menu_manager = GameObject.Find("MenuManager");
             if (menu_manager != null)
             {
-                menu_manager.GetComponent<MenuManagerScript>().Move(GetComponent<PlayerInput>().playerIndex);
+                if (Vector2.Dot(Vector2.up, context.ReadValue<Vector2>()) <= 0)
+                {
+                    menu_manager.GetComponent<MenuManagerScript>().Move(GetComponent<PlayerInput>().playerIndex, 1);
+                }
+                else
+                {
+                    menu_manager.GetComponent<MenuManagerScript>().Move(GetComponent<PlayerInput>().playerIndex, -1);
+                }
             }
         }
         else
@@ -62,12 +76,24 @@ public class PlayerInputHandler : MonoBehaviour
 
     public void OnConfirm(CallbackContext context)
     {
-        if(game_state == 0)
+        if (game_state == 0)
         {
             GameObject menu_manager = GameObject.Find("MenuManager");
-            if(menu_manager != null)
+            if (menu_manager != null)
             {
                 menu_manager.GetComponent<MenuManagerScript>().Select(GetComponent<PlayerInput>().playerIndex);
+            }
+        }
+    }
+
+    public void OnGoBack(CallbackContext context)
+    {
+        if (game_state == 0)
+        {
+            GameObject menu_manager = GameObject.Find("MenuManager");
+            if (menu_manager != null)
+            {
+                menu_manager.GetComponent<MenuManagerScript>().GoBack(GetComponent<PlayerInput>().playerIndex);
             }
         }
     }

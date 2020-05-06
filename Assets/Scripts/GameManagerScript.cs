@@ -97,9 +97,9 @@ public class GameManagerScript : MonoBehaviour
     {
         float min_dist = Mathf.Infinity;
         int min_index = 0;
-        for(int i = 1; i < 4 && i != exception; i++)
+        for(int i = 1; i < 4; i++)
         {
-            if(players[i].activeSelf == true)
+            if(i != exception && players[i].activeSelf == true)
             {
                 float curr_dist = (position - players[i].transform.position).magnitude;
                 if (curr_dist < min_dist)
