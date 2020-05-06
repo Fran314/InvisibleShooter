@@ -16,7 +16,7 @@ public class MenuManagerScript : MonoBehaviour
     [SerializeField]
     private Sprite keyboard, gamepad;
     [SerializeField]
-    private float hold_time = 0.3f;
+    private float hold_time = 0.5f;
     [SerializeField]
     private float wait_before_loading = 1f;
     [SerializeField]
@@ -80,6 +80,11 @@ public class MenuManagerScript : MonoBehaviour
                 if (PlayerInputManagerSingleton.instance.transform.GetChild(i).GetComponent<PlayerInput>().devices[0].displayName == "Keyboard")
                 {
                     icons[i].transform.GetChild(0).GetComponent<Image>().sprite = keyboard;
+                    icons[i].transform.GetChild(2).GetComponent<Text>().text = "Press ENTER\nto set Ready";
+                }
+                else
+                {
+                    icons[i].transform.GetChild(2).GetComponent<Text>().text = "Press (A)\nto set Ready";
                 }
                 icons[i].transform.GetChild(0).GetComponent<Waver>().offset = i;
                 icons[i].GetComponent<RectTransform>().anchoredPosition = new Vector3(128 * i - 192, -64, 0);
@@ -91,15 +96,19 @@ public class MenuManagerScript : MonoBehaviour
             players_count = new_players_count;
         }
 
+        for(int i = 0; i < 4; i++)
+        {
+            cubes[i].SetActive(menu_state == 0);
+        }
         if (menu_state == 0)
         {
             if (players_count > 0 && selected_button == -1) selected_button = 0;
             if(selected_button != -1)
             {
                 cubes[selected_button].GetComponent<MeshRenderer>().material = selected_material;
-                for(int i = 0; i < 4 && i != selected_button; i++)
+                for(int i = 0; i < 4; i++)
                 {
-                    cubes[i].GetComponent<MeshRenderer>().material = unselected_material;
+                    if (i != selected_button) cubes[i].GetComponent<MeshRenderer>().material = unselected_material;
                 }
             }
         }
@@ -110,14 +119,13 @@ public class MenuManagerScript : MonoBehaviour
             }
             else
             {
-                Debug.Log("AAAAAAAAA");
                 canvas.transform.GetChild(1).Find("MainComunication").GetComponent<Text>().text = "Game Starting...";
                 audio.volume -= delta_volume * Time.deltaTime;
                 wait_before_loading -= Time.deltaTime;
 
                 if (wait_before_loading <= 0f)
                 {
-                    LoadLevel();
+                    SceneManager.LoadScene(levels[UnityEngine.Random.Range(0, levels.Length)]);
                 }
             }
         }
@@ -127,12 +135,7 @@ public class MenuManagerScript : MonoBehaviour
         }
     }
 
-    private void LoadLevel()
-    {
-        SceneManager.LoadScene(levels[UnityEngine.Random.Range(0, levels.Length)]);
-    }
-
-    public void Move(int index)
+    public void Move(int index, int direction)
     {
         if (index >= players_count) return;
         if (holds[index] <= hold_time) return;
@@ -141,8 +144,9 @@ public class MenuManagerScript : MonoBehaviour
 
         if (menu_state == 0)
         {
-            selected_button += 1;
-            if (selected_button == 4) selected_button = 0;
+            selected_button += direction;
+            if (selected_button <= -1) selected_button = 3;
+            else if (selected_button >= 4) selected_button = 0;
         }
         else if (menu_state == 1)
         {
@@ -163,7 +167,7 @@ public class MenuManagerScript : MonoBehaviour
 
         if (menu_state == 0)
         {
-            if(selected_button == 0)
+            if (selected_button == 0)
             {
                 menu_state = 1;
                 canvas.transform.GetChild(0).gameObject.SetActive(false);
@@ -173,6 +177,34 @@ public class MenuManagerScript : MonoBehaviour
         else if (menu_state == 1)
         {
             SetReady(index);
+        }
+        else if (menu_state == 2)
+        {
+
+        }
+    }
+
+    public void GoBack(int index)
+    {
+        if (index >= players_count) return;
+        if (holds[index] <= hold_time) return;
+
+        holds[index] = 0f;
+
+        if (menu_state == 0)
+        {
+            if (selected_button == 0)
+            {
+                menu_state = 1;
+                canvas.transform.GetChild(0).gameObject.SetActive(false);
+                canvas.transform.GetChild(1).gameObject.SetActive(true);
+            }
+        }
+        else if (menu_state == 1)
+        {
+            menu_state = 0;
+            canvas.transform.GetChild(0).gameObject.SetActive(true);
+            canvas.transform.GetChild(1).gameObject.SetActive(false);
         }
         else if (menu_state == 2)
         {

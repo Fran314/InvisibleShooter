@@ -103,6 +103,21 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 26bbd291-4c53-48c2-8c27-8c400d2a3a78
     m_ActionName: PlayerMovement/Confirm[/Keyboard/anyKey,/XInputControllerWindows/buttonEast,/XInputControllerWindows/buttonEast,/XInputControllerWindows/buttonNorth,/XInputControllerWindows/buttonNorth,/XInputControllerWindows/buttonSouth,/XInputControllerWindows/buttonSouth,/XInputControllerWindows/buttonWest,/XInputControllerWindows/buttonWest,/XInputControllerWindows/dpad/down,/XInputControllerWindows/dpad/down,/XInputControllerWindows/dpad/left,/XInputControllerWindows/dpad/left,/XInputControllerWindows/dpad/right,/XInputControllerWindows/dpad/right,/XInputControllerWindows/dpad/up,/XInputControllerWindows/dpad/up,/XInputControllerWindows/leftShoulder,/XInputControllerWindows/leftShoulder,/XInputControllerWindows/leftTrigger,/XInputControllerWindows/leftTrigger,/XInputControllerWindows/rightShoulder,/XInputControllerWindows/rightShoulder,/XInputControllerWindows/rightTrigger,/XInputControllerWindows/rightTrigger]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6964115818114076611}
+        m_MethodName: OnGoBack
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 3acc937d-ddc9-460a-b5bd-4fd2cb248348
+    m_ActionName: PlayerMovement/GoBack[/Keyboard/backspace,/XInputControllerWindows/buttonEast]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: PlayerMovement
@@ -120,3 +135,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c4233e3f28842a44ac017deae86909d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  game_state: 0
