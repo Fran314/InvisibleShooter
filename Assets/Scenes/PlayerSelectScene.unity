@@ -1043,7 +1043,7 @@ MonoBehaviour:
   hold_time: 0.2
   levels:
   - SampleScene
-  - SampleScene 1
+  - BarrierScene
 --- !u!4 &1227821435
 Transform:
   m_ObjectHideFlags: 0
