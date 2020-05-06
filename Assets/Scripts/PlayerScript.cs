@@ -92,7 +92,7 @@ public class PlayerScript : MonoBehaviour
 
         if (last_shoot <= -time_before_shooting_exposure) SetDeltaAlpha(bullet_delta_alpha);
 
-        curr_alpha += delta_alpha;
+        curr_alpha += delta_alpha * Time.deltaTime;
         curr_alpha = Mathf.Clamp(curr_alpha, 0f, 1f);
         player_material.color = new Color(player_material.color.r, player_material.color.g, player_material.color.b, curr_alpha);
         moveDirection = new Vector3(inputMove.x, 0, inputMove.y);
