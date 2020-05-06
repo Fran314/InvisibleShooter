@@ -21,21 +21,30 @@ public class PlayerScript : MonoBehaviour
     private float time_before_shooting_exposure = 2f;
     [SerializeField]
     private float bullet_delta_alpha = 0.01f;
+    [SerializeField]
+    private float disappearing_delta_alpha = -2f;
+    [SerializeField]
+    private float appearing_delta_alpha = 2f;
+    [SerializeField]
+    private float disappearing_after_hit = 1f;
 
     public int health = 0;
     private float last_shoot = 0f;
+    private float last_hit = 0f;
 
     private float curr_alpha = 0f;
-    private float delta_alpha = 0f;
 
     private Vector3 moveDirection = Vector3.zero;
     private Vector3 shootDirection = Vector3.zero;
     private Vector2 inputMove = Vector2.zero;
     private Vector2 inputShoot = Vector2.zero;
 
+    private WallsDetector walls_detector;
+
     private void Awake()
     {
         //Reset();
+        walls_detector = GetComponentInChildren<WallsDetector>();
     }
 
     public void Reset(Transform spawn)
@@ -46,7 +55,6 @@ public class PlayerScript : MonoBehaviour
         health = max_health;
         last_shoot = 0f;
         curr_alpha = 1f;
-        delta_alpha = -2f;
     }
 
     public int GetPlayerIndex()
@@ -59,12 +67,12 @@ public class PlayerScript : MonoBehaviour
         player_index = i;
     }
 
-    public void SetInputVector(Vector2 direction)
+    public void SetMoveInput(Vector2 direction)
     {
         inputMove = direction;
     }
 
-    public void Shoot(Vector2 direction)
+    public void SetShootingInput(Vector2 direction)
     {
         if(direction.magnitude <= 0.9f)
         {
@@ -78,23 +86,33 @@ public class PlayerScript : MonoBehaviour
 
     public bool Damage(int damage)
     {
+        last_hit = disappearing_after_hit;
         health -= damage;
         if (health <= 0) return true;
         else return false;
-    }
-
-    public void SetDeltaAlpha(float new_delta_alpha)
-    {
-        delta_alpha = new_delta_alpha;
     }
 
     void Update()
     {
         GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
 
-        if (last_shoot <= -time_before_shooting_exposure) SetDeltaAlpha(bullet_delta_alpha);
+        if(last_hit >= 0)
+        {
+            curr_alpha += appearing_delta_alpha * Time.deltaTime;
+        }
+        else if(walls_detector.is_coliding > 0)
+        {
+            curr_alpha += appearing_delta_alpha * Time.deltaTime;
+        }
+        else if (last_shoot <= -time_before_shooting_exposure)
+        {
+            curr_alpha += bullet_delta_alpha * Time.deltaTime;
+        }
+        else
+        {
+            curr_alpha += disappearing_delta_alpha * Time.deltaTime;
+        }
 
-        curr_alpha += delta_alpha * Time.deltaTime;
         curr_alpha = Mathf.Clamp(curr_alpha, 0f, 1f);
         player_material.color = new Color(player_material.color.r, player_material.color.g, player_material.color.b, curr_alpha);
         moveDirection = new Vector3(inputMove.x, 0, inputMove.y);
@@ -140,10 +158,9 @@ public class PlayerScript : MonoBehaviour
             bullet.GetComponentInChildren<Light>().color = new Color(player_material.color.r, player_material.color.g, player_material.color.b);
 
             last_shoot = shooting_cooldown;
-            curr_alpha = 0f;
-            delta_alpha = 0f;
         }
 
         last_shoot -= Time.deltaTime;
+        last_hit -= Time.deltaTime;
     }
 }

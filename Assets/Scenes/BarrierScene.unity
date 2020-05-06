@@ -133,7 +133,7 @@ GameObject:
   - component: {fileID: 390767854}
   - component: {fileID: 390767853}
   - component: {fileID: 390767852}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: NWBarrier
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -226,7 +226,7 @@ GameObject:
   - component: {fileID: 682960172}
   - component: {fileID: 682960171}
   - component: {fileID: 682960170}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: WestWall (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -325,7 +325,7 @@ GameObject:
   - component: {fileID: 778359660}
   - component: {fileID: 778359659}
   - component: {fileID: 778359658}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: SWBarrier
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -418,7 +418,7 @@ GameObject:
   - component: {fileID: 918401316}
   - component: {fileID: 918401315}
   - component: {fileID: 918401314}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: SEBarrier
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -594,7 +594,7 @@ GameObject:
   - component: {fileID: 1450697871}
   - component: {fileID: 1450697870}
   - component: {fileID: 1450697869}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: NorthBarrier
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -687,7 +687,7 @@ GameObject:
   - component: {fileID: 1537912478}
   - component: {fileID: 1537912477}
   - component: {fileID: 1537912476}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: NEBarrier
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -780,7 +780,7 @@ GameObject:
   - component: {fileID: 1648700693}
   - component: {fileID: 1648700692}
   - component: {fileID: 1648700691}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: EastWall (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -873,7 +873,7 @@ GameObject:
   - component: {fileID: 1748465249}
   - component: {fileID: 1748465248}
   - component: {fileID: 1748465247}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: SouthBarrier
   m_TagString: Untagged
   m_Icon: {fileID: 0}

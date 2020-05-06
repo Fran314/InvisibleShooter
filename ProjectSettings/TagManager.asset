@@ -15,8 +15,8 @@ TagManager:
   - 
   - BulletLayer
   - PlayerLayer
-  - 
-  - 
+  - Walls
+  - WallDetector
   - 
   - 
   - 

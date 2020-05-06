@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameManagerScript : MonoBehaviour
@@ -17,6 +18,7 @@ public class GameManagerScript : MonoBehaviour
     private Transform[] players_spawn;
 
     private int players_count = 0;
+    private PlayerInputHandler[] players_input;
     private PlayerScript[] players_script;
     private Text[] players_scoreboard_text;
     private Text[] players_scoreboard_score;
@@ -33,12 +35,12 @@ public class GameManagerScript : MonoBehaviour
         players_scoreboard_text = new Text[4];
         players_scoreboard_score = new Text[4];
         players_score = new int[4];
-        scoreboard_background = canvas.transform.Find("BackgroundBottom").GetComponent<Image>();
+        scoreboard_background = canvas.transform.Find("Scoreboard").transform.Find("BackgroundBottom").GetComponent<Image>();
 
         for (int i = 0; i < 4; i++)
         {
-            players_scoreboard_text[i] = canvas.transform.Find("Player" + (i + 1) + "Text").GetComponent<Text>();
-            players_scoreboard_score[i] = canvas.transform.Find("Player" + (i + 1) + "Score").GetComponent<Text>();
+            players_scoreboard_text[i] = canvas.transform.Find("Scoreboard").transform.Find("Player" + (i + 1) + "Text").GetComponent<Text>();
+            players_scoreboard_score[i] = canvas.transform.Find("Scoreboard").transform.Find("Player" + (i + 1) + "Score").GetComponent<Text>();
             players_score[i] = 0;
             for (int j = 0; j < 3; j++)
             {
@@ -49,7 +51,7 @@ public class GameManagerScript : MonoBehaviour
 
         if (PlayerInputManagerSingleton.instance == null) return;
         players_count = PlayerInputManagerSingleton.instance.transform.childCount;
-        Transform[] player_inputs = new Transform[players_count];
+        players_input = new PlayerInputHandler[players_count];
 
         scoreboard_background.GetComponent<RectTransform>().localScale = new Vector3(1, players_count, 1);
 
@@ -73,11 +75,11 @@ public class GameManagerScript : MonoBehaviour
 
         for (int i = 0; i < players_count; i++)
         {
-            player_inputs[i] = PlayerInputManagerSingleton.instance.transform.GetChild(i);
+            players_input[i] = PlayerInputManagerSingleton.instance.transform.GetChild(i).GetComponent<PlayerInputHandler>();
             players[i].SetActive(true);
             players_script[i].Reset(players_spawn[i]);
-            player_inputs[i].GetComponent<PlayerInputHandler>().SetPlayerScript(players_script[i].GetComponent<PlayerScript>());
-            player_inputs[i].GetComponent<PlayerInputHandler>().game_state = 1;
+            players_input[i].SetPlayerScript(players_script[i].GetComponent<PlayerScript>());
+            players_input[i].game_state = 1;
         }
     }
 
@@ -152,5 +154,31 @@ public class GameManagerScript : MonoBehaviour
     public void IncreaseScore(int index)
     {
         players_score[index]++;
+        if(players_score[index] >= 5)
+        {
+            for(int i = 0; i < players_count; i++)
+            {
+                players_input[i].game_state = 2;
+                players_script[i].SetMoveInput(Vector2.zero);
+                players_script[i].SetShootingInput(Vector2.zero);
+            }
+            canvas.transform.Find("GameOverMenu").gameObject.SetActive(true);
+            canvas.transform.Find("GameOverMenu").Find("TopText").GetComponent<Text>().text = "PLAYER " + (index+1) + " WON!";
+        }
+    }
+
+    public void Select(int index)
+    {
+        int load_level_type = PlayerInputManagerSingleton.instance.GetComponent<LoadLevelType>().load_level_type;
+        string[] levels = PlayerInputManagerSingleton.instance.GetComponent<LoadLevelType>().levels;
+
+        if (load_level_type == 0) SceneManager.LoadScene(levels[UnityEngine.Random.Range(0, levels.Length)]);
+        else SceneManager.LoadScene(levels[load_level_type - 1]);
+    }
+
+    public void GoBack(int index)
+    {
+        Destroy(PlayerInputManagerSingleton.instance.gameObject);
+        SceneManager.LoadScene("PlayerSelectScene");
     }
 }

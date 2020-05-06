@@ -133,7 +133,7 @@ GameObject:
   - component: {fileID: 89428907}
   - component: {fileID: 89428906}
   - component: {fileID: 89428905}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: WestWall (8)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -226,7 +226,7 @@ GameObject:
   - component: {fileID: 298775117}
   - component: {fileID: 298775116}
   - component: {fileID: 298775115}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: WestWall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -319,7 +319,7 @@ GameObject:
   - component: {fileID: 611211932}
   - component: {fileID: 611211931}
   - component: {fileID: 611211930}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: WestWall (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -418,7 +418,7 @@ GameObject:
   - component: {fileID: 756843963}
   - component: {fileID: 756843962}
   - component: {fileID: 756843961}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Floor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -594,7 +594,7 @@ GameObject:
   - component: {fileID: 1064575857}
   - component: {fileID: 1064575856}
   - component: {fileID: 1064575855}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: NorthVWall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -688,7 +688,7 @@ GameObject:
   - component: {fileID: 1163238325}
   - component: {fileID: 1163238324}
   - component: {fileID: 1163238323}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: WestWall (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -781,7 +781,7 @@ GameObject:
   - component: {fileID: 1245172426}
   - component: {fileID: 1245172425}
   - component: {fileID: 1245172424}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: WestWall (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -871,7 +871,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1403726642}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Room
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -917,7 +917,7 @@ GameObject:
   - component: {fileID: 1423026943}
   - component: {fileID: 1423026942}
   - component: {fileID: 1423026941}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: EastWall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1010,7 +1010,7 @@ GameObject:
   - component: {fileID: 1614597723}
   - component: {fileID: 1614597722}
   - component: {fileID: 1614597721}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: WestWall (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1103,7 +1103,7 @@ GameObject:
   - component: {fileID: 1756301448}
   - component: {fileID: 1756301447}
   - component: {fileID: 1756301446}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: WestWall (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1196,7 +1196,7 @@ GameObject:
   - component: {fileID: 1896560610}
   - component: {fileID: 1896560609}
   - component: {fileID: 1896560608}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: WestWall (7)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1289,7 +1289,7 @@ GameObject:
   - component: {fileID: 2113539862}
   - component: {fileID: 2113539861}
   - component: {fileID: 2113539860}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: WestWall (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1587,7 +1587,7 @@ GameObject:
   - component: {fileID: 8090510644746217940}
   - component: {fileID: 677200591998420260}
   - component: {fileID: 8376212220886251954}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: SouthVWall
   m_TagString: Untagged
   m_Icon: {fileID: 0}

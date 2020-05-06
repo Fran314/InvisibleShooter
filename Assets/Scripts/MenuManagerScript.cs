@@ -35,6 +35,9 @@ public class MenuManagerScript : MonoBehaviour
     private Material unselected_material;
 
     [SerializeField]
+    private GameObject player_input_manager_prefab;
+
+    [SerializeField]
     private AudioSource audio;
 
     [SerializeField]
@@ -55,12 +58,20 @@ public class MenuManagerScript : MonoBehaviour
         readys = new List<bool>();
         holds = new List<float>();
         icons = new List<GameObject>();
+
+        GameObject pim = GameObject.Find("PlayerInputManager");
+        if(pim == null)
+        {
+            Instantiate(player_input_manager_prefab);
+        }
+
+        PlayerInputManagerSingleton.instance.GetComponent<LoadLevelType>().levels = levels;
     }
 
     public void SetReady(int index)
     {
         readys[index] = true;
-        icons[index].transform.GetChild(2).gameObject.SetActive(false);
+        icons[index].transform.GetChild(2).GetComponent<Text>().text = "";
         icons[index].transform.GetChild(1).GetComponent<Text>().text = "Ready!";
 
         if(players_count >= 2 && readys.All(b => b == true))
@@ -220,6 +231,7 @@ public class MenuManagerScript : MonoBehaviour
         else if (menu_state == 5)
         {
             loading_level = true;
+            PlayerInputManagerSingleton.instance.GetComponent<LoadLevelType>().load_level_type = selected_button;
         }
         else if (menu_state == 6)
         {
@@ -248,10 +260,8 @@ public class MenuManagerScript : MonoBehaviour
         }
         else if (menu_state == 1)
         {
-            menu_state = 0;
-            canvas.transform.GetChild(0).gameObject.SetActive(true);
-            canvas.transform.GetChild(1).gameObject.SetActive(false);
-            main_menu_cubes[0].transform.parent.gameObject.SetActive(true);
+            Destroy(PlayerInputManagerSingleton.instance.gameObject);
+            SceneManager.LoadScene("PlayerSelectScene");
         }
         else if (menu_state == 2)
         {
@@ -276,11 +286,26 @@ public class MenuManagerScript : MonoBehaviour
         }
         else if (menu_state == 5)
         {
-
+            menu_state = 1;
+            canvas.transform.GetChild(1).gameObject.SetActive(true);
+            canvas.transform.GetChild(5).gameObject.SetActive(false);
+            select_level_cubes[0].transform.parent.gameObject.SetActive(false);
+            for (int i = 0; i < players_count; i++)
+            {
+                if (PlayerInputManagerSingleton.instance.transform.GetChild(i).GetComponent<PlayerInput>().devices[0].displayName == "Keyboard")
+                {
+                    icons[i].transform.GetChild(2).GetComponent<Text>().text = "Press ENTER\nto set Ready";
+                }
+                else
+                {
+                    icons[i].transform.GetChild(2).GetComponent<Text>().text = "Press (A)\nto set Ready";
+                }
+                icons[i].transform.GetChild(1).GetComponent<Text>().text = "Player " + (i + 1).ToString() + " Joined!";
+                readys[i] = false;
+            }
         }
         else if(menu_state == 6)
         {
-            Debug.Log("Welp");
             Application.Quit();
         }
     }

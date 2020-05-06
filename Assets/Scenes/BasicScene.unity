@@ -222,7 +222,7 @@ GameObject:
   - component: {fileID: 1233450723}
   - component: {fileID: 1233450722}
   - component: {fileID: 1233450721}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: WestWall (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -315,7 +315,7 @@ GameObject:
   - component: {fileID: 1600353239}
   - component: {fileID: 1600353238}
   - component: {fileID: 1600353237}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: EastWall (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

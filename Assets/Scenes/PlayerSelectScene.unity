@@ -1132,7 +1132,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: THE INVISIBLE MEN
+  m_Text: PHANTOM BATTLE
 --- !u!222 &386682259
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1544,115 +1544,6 @@ Transform:
   m_Father: {fileID: 1429214991}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &543310679
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 821963621545485752, guid: 72ffae3eeee18424ab8dbdae756cb748,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -15.984643
-      objectReference: {fileID: 0}
-    - target: {fileID: 821963621545485752, guid: 72ffae3eeee18424ab8dbdae756cb748,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 2.9544735
-      objectReference: {fileID: 0}
-    - target: {fileID: 821963621545485752, guid: 72ffae3eeee18424ab8dbdae756cb748,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 44.415062
-      objectReference: {fileID: 0}
-    - target: {fileID: 821963621545485752, guid: 72ffae3eeee18424ab8dbdae756cb748,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 821963621545485752, guid: 72ffae3eeee18424ab8dbdae756cb748,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 821963621545485752, guid: 72ffae3eeee18424ab8dbdae756cb748,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 821963621545485752, guid: 72ffae3eeee18424ab8dbdae756cb748,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 821963621545485752, guid: 72ffae3eeee18424ab8dbdae756cb748,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 821963621545485752, guid: 72ffae3eeee18424ab8dbdae756cb748,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 821963621545485752, guid: 72ffae3eeee18424ab8dbdae756cb748,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 821963621545485752, guid: 72ffae3eeee18424ab8dbdae756cb748,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 821963621545485753, guid: 72ffae3eeee18424ab8dbdae756cb748,
-        type: 3}
-      propertyPath: m_PlayerJoinedEvent.m_PersistentCalls.m_Calls.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 821963621545485753, guid: 72ffae3eeee18424ab8dbdae756cb748,
-        type: 3}
-      propertyPath: m_NotificationBehavior
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 821963621545485753, guid: 72ffae3eeee18424ab8dbdae756cb748,
-        type: 3}
-      propertyPath: m_PlayerJoinedEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 821963621545485753, guid: 72ffae3eeee18424ab8dbdae756cb748,
-        type: 3}
-      propertyPath: m_PlayerJoinedEvent.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 821963621545485753, guid: 72ffae3eeee18424ab8dbdae756cb748,
-        type: 3}
-      propertyPath: m_PlayerJoinedEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1158613822}
-    - target: {fileID: 821963621545485753, guid: 72ffae3eeee18424ab8dbdae756cb748,
-        type: 3}
-      propertyPath: m_PlayerJoinedEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: HandlePlayerJoin
-      objectReference: {fileID: 0}
-    - target: {fileID: 821963621545485753, guid: 72ffae3eeee18424ab8dbdae756cb748,
-        type: 3}
-      propertyPath: m_PlayerJoinedEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 821963621545485753, guid: 72ffae3eeee18424ab8dbdae756cb748,
-        type: 3}
-      propertyPath: m_MaxPlayerCount
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 821963621545485758, guid: 72ffae3eeee18424ab8dbdae756cb748,
-        type: 3}
-      propertyPath: m_Name
-      value: PlayerInputManager
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 72ffae3eeee18424ab8dbdae756cb748, type: 3}
 --- !u!1 &588344611
 GameObject:
   m_ObjectHideFlags: 0
@@ -1876,7 +1767,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: THE INVISIBLE MEN
+  m_Text: PHANTOM BATTLE
 --- !u!222 &738007835
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2148,7 +2039,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: THE INVISIBLE MEN
+  m_Text: PHANTOM BATTLE
 --- !u!222 &891509032
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2188,7 +2079,7 @@ Transform:
   - {fileID: 1808917526}
   - {fileID: 1678269422}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &904831003
 GameObject:
@@ -2670,27 +2561,8 @@ Transform:
   m_LocalScale: {x: 25.08, y: 1, z: 28.62}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1158613821 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 821963621545485758, guid: 72ffae3eeee18424ab8dbdae756cb748,
-    type: 3}
-  m_PrefabInstance: {fileID: 543310679}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1158613822
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1158613821}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 517c4d2d0e02b4844a3c648edca5005d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  input_list: []
 --- !u!1 &1167568752
 GameObject:
   m_ObjectHideFlags: 0
@@ -2760,7 +2632,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: THE INVISIBLE MEN
+  m_Text: PHANTOM BATTLE
 --- !u!222 &1167568755
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2838,7 +2710,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: THE INVISIBLE MEN
+  m_Text: PHANTOM BATTLE
 --- !u!222 &1190609094
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2991,6 +2863,8 @@ MonoBehaviour:
   quit_cube: {fileID: 1514898297}
   selected_material: {fileID: 2100000, guid: 241c2e2d036f97f4fad31214a25efc7c, type: 2}
   unselected_material: {fileID: 2100000, guid: 0889e8a364cb98947b554242685e5874, type: 2}
+  player_input_manager_prefab: {fileID: 821963621545485758, guid: 72ffae3eeee18424ab8dbdae756cb748,
+    type: 3}
   audio: {fileID: 1227821436}
   levels:
   - BasicScene
@@ -3009,7 +2883,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!82 &1227821436
 AudioSource:
@@ -3397,7 +3271,7 @@ RectTransform:
   - {fileID: 1618366886}
   - {fileID: 1502894611}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -3473,7 +3347,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: THE INVISIBLE MEN
+  m_Text: PHANTOM BATTLE
 --- !u!222 &1341151817
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3615,7 +3489,7 @@ Transform:
   - {fileID: 2009416732}
   - {fileID: 1491842339}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1486057022
 GameObject:
@@ -4676,7 +4550,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: THE INVISIBLE MEN
+  m_Text: PHANTOM BATTLE
 --- !u!222 &1807921906
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -5258,8 +5132,10 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: '- Thanks to Loyalty Freak Music at freemusicarchive.org for "Can''t Stop
-    My Feet!", used as the main menu music'
+  m_Text: '- Main Menu Music: "Can''t Stop My Feet" by Loyalty Freak Music, from
+    freemusicarchive.org
+
+    - Level Music: "Divide by Zero", from PlayOnLoop.com'
 --- !u!222 &2041122456
 CanvasRenderer:
   m_ObjectHideFlags: 0

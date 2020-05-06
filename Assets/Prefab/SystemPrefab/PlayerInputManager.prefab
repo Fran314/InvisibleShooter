@@ -10,6 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 821963621545485752}
   - component: {fileID: 821963621545485753}
+  - component: {fileID: 7731757700370966610}
+  - component: {fileID: 6619572781144196083}
   m_Layer: 0
   m_Name: PlayerInputManager
   m_TagString: Untagged
@@ -43,13 +45,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 621567455fd1c4ceb811cc8a00b6a1a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_NotificationBehavior: 0
+  m_NotificationBehavior: 2
   m_MaxPlayerCount: 4
   m_AllowJoining: 1
   m_JoinBehavior: 0
   m_PlayerJoinedEvent:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6619572781144196083}
+        m_MethodName: HandlePlayerJoin
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_PlayerLeftEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -75,3 +88,30 @@ MonoBehaviour:
     y: 0
     width: 1
     height: 1
+--- !u!114 &7731757700370966610
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 821963621545485758}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec5ba8f5d88925c48ada95a32b8f888d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  levels: []
+  load_level_type: 0
+--- !u!114 &6619572781144196083
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 821963621545485758}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 517c4d2d0e02b4844a3c648edca5005d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  input_list: []

@@ -36,10 +36,10 @@ public class PlayerInputHandler : MonoBehaviour
                 menu_manager.GetComponent<MenuManagerScript>().Move(GetComponent<PlayerInput>().playerIndex, context.ReadValue<Vector2>().normalized);
             }
         }
-        else
+        else if (game_state == 1)
         {
             if (player != null)
-                player.SetInputVector(context.ReadValue<Vector2>());
+                player.SetMoveInput(context.ReadValue<Vector2>());
         }
     }
 
@@ -53,10 +53,10 @@ public class PlayerInputHandler : MonoBehaviour
                 menu_manager.GetComponent<MenuManagerScript>().Move(GetComponent<PlayerInput>().playerIndex, context.ReadValue<Vector2>().normalized);
             }
         }
-        else
+        else if (game_state == 1)
         {
             if (player != null)
-            player.Shoot(context.ReadValue<Vector2>());
+            player.SetShootingInput(context.ReadValue<Vector2>());
         }
     }
 
@@ -70,6 +70,15 @@ public class PlayerInputHandler : MonoBehaviour
                 menu_manager.GetComponent<MenuManagerScript>().Select(GetComponent<PlayerInput>().playerIndex);
             }
         }
+        else if (game_state == 2)
+        {
+            Debug.Log("Confirm");
+            GameObject game_manager = GameObject.Find("GameManager");
+            if (game_manager != null)
+            {
+                game_manager.GetComponent<GameManagerScript>().Select(GetComponent<PlayerInput>().playerIndex);
+            }
+        }
     }
 
     public void OnGoBack(CallbackContext context)
@@ -80,6 +89,14 @@ public class PlayerInputHandler : MonoBehaviour
             if (menu_manager != null)
             {
                 menu_manager.GetComponent<MenuManagerScript>().GoBack(GetComponent<PlayerInput>().playerIndex);
+            }
+        }
+        else if (game_state == 2)
+        {
+            GameObject game_manager = GameObject.Find("GameManager");
+            if (game_manager != null)
+            {
+                game_manager.GetComponent<GameManagerScript>().GoBack(GetComponent<PlayerInput>().playerIndex);
             }
         }
     }
