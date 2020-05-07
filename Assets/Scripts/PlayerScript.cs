@@ -35,6 +35,7 @@ public class PlayerScript : MonoBehaviour
     public int health = 0;
     private float last_shoot = 0f;
     private float last_hit = 0f;
+    private bool visible = false;
 
     private float curr_alpha = 0f;
 
@@ -89,6 +90,19 @@ public class PlayerScript : MonoBehaviour
         }
     }
 
+    public void SetVisible(float value)
+    {
+        if(value >= 0.5f)
+        {
+            visible = true;
+        }
+        else
+        {
+            visible = false;
+            if(last_shoot < 0) last_shoot = 0;
+        }
+    }
+
     public bool Damage(int damage)
     {
         last_hit = disappearing_after_hit;
@@ -102,6 +116,10 @@ public class PlayerScript : MonoBehaviour
     {
         GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
 
+        if(visible)
+        {
+            curr_alpha = 1;
+        }
         if(last_hit >= 0)
         {
             curr_alpha += appearing_delta_alpha * Time.deltaTime;
@@ -120,6 +138,7 @@ public class PlayerScript : MonoBehaviour
         }
 
         curr_alpha = Mathf.Clamp(curr_alpha, 0f, 1f);
+
         player_material.color = new Color(player_material.color.r, player_material.color.g, player_material.color.b, curr_alpha);
         moveDirection = new Vector3(inputMove.x, 0, inputMove.y);
         moveDirection = transform.TransformDirection(moveDirection);

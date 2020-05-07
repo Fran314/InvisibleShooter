@@ -56,7 +56,7 @@ public class PlayerInputHandler : MonoBehaviour
         else if (game_state == 1)
         {
             if (player != null)
-            player.SetShootingInput(context.ReadValue<Vector2>());
+                player.SetShootingInput(context.ReadValue<Vector2>());
         }
     }
 
@@ -97,6 +97,15 @@ public class PlayerInputHandler : MonoBehaviour
             {
                 game_manager.GetComponent<GameManagerScript>().GoBack(GetComponent<PlayerInput>().playerIndex);
             }
+        }
+    }
+
+    public void OnVisible(CallbackContext context)
+    {
+        if(game_state == 1)
+        {
+            if (player != null)
+                player.SetVisible(context.ReadValue<float>());
         }
     }
 }
