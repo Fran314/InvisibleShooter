@@ -5932,7 +5932,16 @@ MonoBehaviour:
   m_Text: '- Main Menu Music: "Can''t Stop My Feet" by Loyalty Freak Music, from
     freemusicarchive.org
 
-    - Level Music: "Divide by Zero", from PlayOnLoop.com'
+    - Level Music: "Divide by Zero", from PlayOnLoop.com
+
+    This
+    Videogames uses these sounds from freesound:
+
+    -Respawn: "teleport" by Sergenious
+    ( https://freesound.org/people/Sergenious/ )
+
+    -Shooting: "laser" by kafokafo
+    ( https://freesound.org/people/kafokafo/)'
 --- !u!222 &2041122456
 CanvasRenderer:
   m_ObjectHideFlags: 0
