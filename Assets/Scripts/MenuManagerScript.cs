@@ -47,6 +47,7 @@ public class MenuManagerScript : MonoBehaviour
     private List<bool> readys;
     private List<float> holds;
     private List<GameObject> icons;
+    private Color[] players_color = { new Color(0.140995f, 0.865f, 0.865f), new Color(0.78f, 0.18252f, 0.78f), new Color(0.901f, 0.7020628f, 0.06937696f), new Color(0.07378396f, 0.802f, 0.07378396f)};
 
     private bool loading_level = false;
 
@@ -71,8 +72,8 @@ public class MenuManagerScript : MonoBehaviour
     public void SetReady(int index)
     {
         readys[index] = true;
-        icons[index].transform.GetChild(2).GetComponent<Text>().text = "";
-        icons[index].transform.GetChild(1).GetComponent<Text>().text = "Ready!";
+        icons[index].transform.Find("Info").GetComponent<Text>().text = "";
+        icons[index].transform.Find("Comunication").GetComponent<Text>().text = "Ready!";
 
         if(players_count >= 2 && readys.All(b => b == true))
         {
@@ -100,16 +101,17 @@ public class MenuManagerScript : MonoBehaviour
                 icons.Add(Instantiate(player_icon_prefab, canvas.transform.GetChild(1)));
                 if (PlayerInputManagerSingleton.instance.transform.GetChild(i).GetComponent<PlayerInput>().devices[0].displayName == "Keyboard")
                 {
-                    icons[i].transform.GetChild(0).GetComponent<Image>().sprite = keyboard;
-                    icons[i].transform.GetChild(2).GetComponent<Text>().text = "Press ENTER\nto set Ready";
+                    icons[i].transform.Find("Image").GetComponent<Image>().sprite = keyboard;
+                    icons[i].transform.Find("Info").GetComponent<Text>().text = "Press ENTER\nto set Ready";
                 }
                 else
                 {
-                    icons[i].transform.GetChild(2).GetComponent<Text>().text = "Press (A)\nto set Ready";
+                    icons[i].transform.Find("Info").GetComponent<Text>().text = "Press (A)\nto set Ready";
                 }
-                icons[i].transform.GetChild(0).GetComponent<Waver>().offset = i;
+                icons[i].transform.Find("Image").GetComponent<Waver>().offset = i;
                 icons[i].GetComponent<RectTransform>().anchoredPosition = new Vector3(128 * i - 192, -64, 0);
-                icons[i].transform.GetChild(1).GetComponent<Text>().text = "Player " + (i + 1).ToString() + " Joined!";
+                icons[i].transform.Find("Comunication").GetComponent<Text>().text = "Player " + (i + 1).ToString() + " Joined!";
+                icons[i].transform.Find("Comunication").GetComponent<Text>().color = players_color[i];
                 readys.Add(false);
                 holds.Add(0f);
             }
@@ -332,13 +334,13 @@ public class MenuManagerScript : MonoBehaviour
             {
                 if (PlayerInputManagerSingleton.instance.transform.GetChild(i).GetComponent<PlayerInput>().devices[0].displayName == "Keyboard")
                 {
-                    icons[i].transform.GetChild(2).GetComponent<Text>().text = "Press ENTER\nto set Ready";
+                    icons[i].transform.Find("Info").GetComponent<Text>().text = "Press ENTER\nto set Ready";
                 }
                 else
                 {
-                    icons[i].transform.GetChild(2).GetComponent<Text>().text = "Press (A)\nto set Ready";
+                    icons[i].transform.Find("Info").GetComponent<Text>().text = "Press (A)\nto set Ready";
                 }
-                icons[i].transform.GetChild(1).GetComponent<Text>().text = "Player " + (i + 1).ToString() + " Joined!";
+                icons[i].transform.Find("Comunication").GetComponent<Text>().text = "Player " + (i + 1).ToString() + " Joined!";
                 readys[i] = false;
             }
         }
