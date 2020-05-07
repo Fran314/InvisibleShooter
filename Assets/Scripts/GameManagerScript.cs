@@ -28,6 +28,11 @@ public class GameManagerScript : MonoBehaviour
 
     public Sprite full_heart, empty_heart;
 
+    [SerializeField]
+    private int game_state = 1;
+
+    private bool listen_to_input = true;
+
     void Start()
     {
         hearts = new Image[12];
@@ -87,6 +92,7 @@ public class GameManagerScript : MonoBehaviour
     {
         for (int i = 0; i < players_count; i++)
         {
+            players_input[i].game_state = game_state;
             if(players_script[i].health < 3)
             {
                 hearts[i * 3 + 2].sprite = empty_heart;
@@ -156,9 +162,9 @@ public class GameManagerScript : MonoBehaviour
         players_score[index]++;
         if(players_score[index] >= 5)
         {
-            for(int i = 0; i < players_count; i++)
+            game_state = 2;
+            for (int i = 0; i < players_count; i++)
             {
-                players_input[i].game_state = 2;
                 players_script[i].SetMoveInput(Vector2.zero);
                 players_script[i].SetShootingInput(Vector2.zero);
             }
@@ -169,16 +175,55 @@ public class GameManagerScript : MonoBehaviour
 
     public void Select(int index)
     {
-        int load_level_type = PlayerInputManagerSingleton.instance.GetComponent<LoadLevelType>().load_level_type;
-        string[] levels = PlayerInputManagerSingleton.instance.GetComponent<LoadLevelType>().levels;
+        if(listen_to_input)
+        {
+            if (game_state == 2)
+            {
+                int load_level_type = PlayerInputManagerSingleton.instance.GetComponent<LoadLevelType>().load_level_type;
+                string[] levels = PlayerInputManagerSingleton.instance.GetComponent<LoadLevelType>().levels;
 
-        if (load_level_type == 0) SceneManager.LoadScene(levels[UnityEngine.Random.Range(0, levels.Length)]);
-        else SceneManager.LoadScene(levels[load_level_type - 1]);
+                if (load_level_type == 0) SceneManager.LoadScene(levels[UnityEngine.Random.Range(0, levels.Length)]);
+                else SceneManager.LoadScene(levels[load_level_type - 1]);
+            }
+            else if (game_state == 3)
+            {
+                game_state = 1;
+                canvas.transform.Find("PauseMenu").gameObject.SetActive(false);
+            }
+        }
     }
 
     public void GoBack(int index)
     {
-        Destroy(PlayerInputManagerSingleton.instance.gameObject);
-        SceneManager.LoadScene("PlayerSelectScene");
+        if(listen_to_input)
+        {
+            if (game_state == 1)
+            {
+                game_state = 3;
+                for (int i = 0; i < players_count; i++)
+                {
+                    players_script[i].SetMoveInput(Vector2.zero);
+                    players_script[i].SetShootingInput(Vector2.zero);
+                }
+                canvas.transform.Find("PauseMenu").gameObject.SetActive(true);
+                listen_to_input = false;
+                Invoke("ListenToInput", 0.5f);
+            }
+            else if (game_state == 2)
+            {
+                Destroy(PlayerInputManagerSingleton.instance.gameObject);
+                SceneManager.LoadScene("PlayerSelectScene");
+            }
+            else if (game_state == 3)
+            {
+                Destroy(PlayerInputManagerSingleton.instance.gameObject);
+                SceneManager.LoadScene("PlayerSelectScene");
+            }
+        }
+    }
+
+    public void ListenToInput()
+    {
+        listen_to_input = true;
     }
 }
