@@ -27,6 +27,10 @@ public class PlayerScript : MonoBehaviour
     private float appearing_delta_alpha = 2f;
     [SerializeField]
     private float disappearing_after_hit = 1f;
+    [SerializeField]
+    private AudioSource hit_sound;
+    [SerializeField]
+    private AudioSource respawn_sound;
 
     public int health = 0;
     private float last_shoot = 0f;
@@ -41,9 +45,9 @@ public class PlayerScript : MonoBehaviour
 
     private WallsDetector walls_detector;
 
+
     private void Awake()
     {
-        //Reset();
         walls_detector = GetComponentInChildren<WallsDetector>();
     }
 
@@ -55,6 +59,7 @@ public class PlayerScript : MonoBehaviour
         health = max_health;
         last_shoot = 0f;
         curr_alpha = 1f;
+        respawn_sound.Play();
     }
 
     public int GetPlayerIndex()
@@ -88,6 +93,7 @@ public class PlayerScript : MonoBehaviour
     {
         last_hit = disappearing_after_hit;
         health -= damage;
+        hit_sound.Play();
         if (health <= 0) return true;
         else return false;
     }

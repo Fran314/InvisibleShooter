@@ -170,10 +170,13 @@ public class MenuManagerScript : MonoBehaviour
         }
         else if(menu_state == 5)
         {
-            if (Vector2.Dot(Vector2.left, direction) <= 0) selected_button += 1;
-            else selected_button -= 1;
-            if (selected_button <= -1) selected_button = select_level_cubes.Length - 1;
-            else if (selected_button >= select_level_cubes.Length) selected_button = 0;
+            if(!loading_level)
+            {
+                if (Vector2.Dot(Vector2.left, direction) <= 0) selected_button += 1;
+                else selected_button -= 1;
+                if (selected_button <= -1) selected_button = select_level_cubes.Length - 1;
+                else if (selected_button >= select_level_cubes.Length) selected_button = 0;
+            }
         }
     }
 

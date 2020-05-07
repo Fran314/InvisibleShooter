@@ -140,7 +140,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   initial_speed: 40
-  acceleration_factor: 1000
+  speed_cap: 60
+  acceleration_factor: 15000
+  acceleration_pow: 5
   damage: 1
   delete_at_distance: 1
   particle_prefab: {fileID: 6571392424075340952, guid: 1150b2fbd922e204182672f47d2db5e0,

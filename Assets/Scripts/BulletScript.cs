@@ -11,6 +11,8 @@ public class BulletScript : MonoBehaviour
     [SerializeField]
     private float acceleration_factor = 15f;
     [SerializeField]
+    private float acceleration_pow = 2.5f;
+    [SerializeField]
     private int damage = 1;
     [SerializeField]
     private float delete_at_distance = 1f;
@@ -32,7 +34,7 @@ public class BulletScript : MonoBehaviour
         int closest_player_index = game_manager.GetClosestPlayerIndexExcept(transform.position, index);
         Vector3 distance_to_player = closest_player_position - transform.position;
         Vector3 curr_acceleration = distance_to_player;
-        curr_acceleration *= (1 / (curr_acceleration.magnitude * curr_acceleration.magnitude * curr_acceleration.magnitude * curr_acceleration.magnitude));
+        curr_acceleration *= (1 / (Mathf.Pow(curr_acceleration.magnitude, acceleration_pow)));
         curr_acceleration *=  acceleration_factor;
         velocity += (curr_acceleration * Time.deltaTime);
         if (velocity.magnitude >= speed_cap) velocity = velocity.normalized * speed_cap;
