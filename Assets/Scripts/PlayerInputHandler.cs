@@ -70,9 +70,8 @@ public class PlayerInputHandler : MonoBehaviour
                 menu_manager.GetComponent<MenuManagerScript>().Select(GetComponent<PlayerInput>().playerIndex);
             }
         }
-        else if (game_state == 2)
+        else if (game_state == 1 || game_state == 2 || game_state == 3)
         {
-            Debug.Log("Confirm");
             GameObject game_manager = GameObject.Find("GameManager");
             if (game_manager != null)
             {
@@ -91,7 +90,7 @@ public class PlayerInputHandler : MonoBehaviour
                 menu_manager.GetComponent<MenuManagerScript>().GoBack(GetComponent<PlayerInput>().playerIndex);
             }
         }
-        else if (game_state == 2)
+        else if (game_state == 1 || game_state == 2 || game_state == 3)
         {
             GameObject game_manager = GameObject.Find("GameManager");
             if (game_manager != null)

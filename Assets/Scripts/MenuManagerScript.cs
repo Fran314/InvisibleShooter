@@ -156,26 +156,61 @@ public class MenuManagerScript : MonoBehaviour
 
     public void Move(int index, Vector2 direction)
     {
-        if (index >= players_count) return;
-        if (holds[index] <= hold_time) return;
-
-        holds[index] = 0f;
-
-        if (menu_state == 0)
+        if(direction.magnitude >= 0.7f)
         {
-            if (Vector2.Dot(Vector2.up, direction) <= 0) selected_button += 1;
-            else selected_button -= 1;
-            if (selected_button <= -1) selected_button = main_menu_cubes.Length - 1;
-            else if (selected_button >= main_menu_cubes.Length) selected_button = 0;
-        }
-        else if(menu_state == 5)
-        {
-            if(!loading_level)
+            if (index >= players_count) return;
+            if (holds[index] <= hold_time) return;
+
+            holds[index] = 0f;
+
+            if (menu_state == 0)
             {
-                if (Vector2.Dot(Vector2.left, direction) <= 0) selected_button += 1;
+                if (Vector2.Dot(Vector2.up, direction) <= 0) selected_button += 1;
                 else selected_button -= 1;
-                if (selected_button <= -1) selected_button = select_level_cubes.Length - 1;
-                else if (selected_button >= select_level_cubes.Length) selected_button = 0;
+                if (selected_button <= -1) selected_button = main_menu_cubes.Length - 1;
+                else if (selected_button >= main_menu_cubes.Length) selected_button = 0;
+            }
+            else if (menu_state == 5)
+            {
+                if (!loading_level)
+                {
+                    float up_dot = Vector2.Dot(Vector2.up, direction);
+                    if (up_dot >= 0.7f)
+                    {
+                        if (selected_button < 3) selected_button += 3;
+                        else selected_button -= 3;
+                    }
+                    else if (up_dot <= -0.7f)
+                    {
+                        if (selected_button < 3) selected_button += 3;
+                        else selected_button -= 3;
+                    }
+                    else
+                    {
+                        if (Vector2.Dot(Vector2.right, direction) >= 0)
+                        {
+                            if(selected_button == 2 || selected_button == 5)
+                            {
+                                selected_button -= 2;
+                            }
+                            else
+                            {
+                                selected_button++;
+                            }
+                        }
+                        else
+                        {
+                            if(selected_button == 0 || selected_button == 3)
+                            {
+                                selected_button += 2;
+                            }
+                            else
+                            {
+                                selected_button--;
+                            }
+                        }
+                    }
+                }
             }
         }
     }
